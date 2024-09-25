@@ -38,18 +38,26 @@ namespace Linq
                                        NameLength = p.Name.Length
                                    });
 
-            foreach (var item in dtos)
-            {
-                Console.WriteLine($"Name: {item.Name} NameLength: {item.NameLength}");
-            }
+            //foreach (var item in dtos)
+            //{
+            //    Console.WriteLine($"Name: {item.Name} NameLength: {item.NameLength}");
+            //}
 
+            var people2 = GetPeople();
 
+            //people2.ForEach(p => Console.WriteLine(p));
+            people2.ForEach(Console.WriteLine);
+            //people2.ForEach(Test);
 
         }
 
         private static bool IsOver30(Person person)
         {
             return person.Age > 30; 
+        }
+        private static void Test(Person person)
+        {
+            Console.WriteLine(person);
         }
         private static List<Person> GetPeople()
         {
