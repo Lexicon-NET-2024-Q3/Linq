@@ -10,19 +10,39 @@ namespace Linq
             IEnumerable<Person> people = GetPeople();
 
             //var allPeopleOver30 = people.Where(p => p.Age > 30).Select(p => p.Name); 
-            var allPeopleOver30b = people.Where(IsOver30).Select(p => p.Name);
+            var allPeopleOver30b = people.Where(IsOver30).Select(person => person.Name);
 
             var allPeopleOver30 = people.OursWhere(p => p.Age > 30).Select(p=>p.Name);
+            var allPeopleOver30c = people.OursWhere(IsOver30).Select(p=>p.Name);
 
 
-            foreach (var person in allPeopleOver30)
-            {
-                Console.WriteLine(person);
-            }
+            //foreach (var person in allPeopleOver30)
+            //{
+            //    Console.WriteLine(person);
+            //}
             //foreach (var person in allPeopleOver30b)
             //{
             //    Console.WriteLine(person);
             //}
+
+            var sumOfAges = people.Where(p => p.Name == "Pelle")
+                                  .Select(p => p.Age)
+                                  .Sum();
+
+            //Console.WriteLine(sumOfAges);
+
+            IEnumerable<PersonDto> dtos = people.Where(p => p.Name == "Pelle")
+                                   .Select(p => new PersonDto
+                                   {
+                                       Name = p.Name,
+                                       NameLength = p.Name.Length
+                                   });
+
+            foreach (var item in dtos)
+            {
+                Console.WriteLine($"Name: {item.Name} NameLength: {item.NameLength}");
+            }
+
 
 
         }
